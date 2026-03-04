@@ -105,3 +105,21 @@ function deleteTodo(id) {
 
     console.log(`ID ${id}번 항목이 삭제되었습니다.`);
 }
+
+function updateTodo(id, newContent) {
+    // 기존 Todo 목록 불러오기
+    const todos = loadTodos();
+
+    const todo = todos.find((t) => t.id === id);
+
+    if (!todo) {
+        console.log("해당 ID를 찾을 수 없습니다.");
+        return;
+    }
+
+    todo.content = newContent;
+    // 파일에 저장
+    saveTodos(todos);
+
+    console.log(`ID ${id}번 항목이 수정되었습니다.`);
+}
