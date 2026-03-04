@@ -23,3 +23,27 @@ function saveTodos(todos) {
     // null, 2는 예쁘게 들여쓰기 하기 위함
     fs.writeFileSync(FILE_PATH, JSON.stringify(todos, null, 2));
 }
+
+// Todo 추가 함수
+function addTodo(content) {
+    // 기존 Todo 목록 불러오기
+    const todos = loadTodos();
+    
+    // 새로운 ID 만들기
+    // 만약 기존 데이터가 있다면 maxID + 1, 없다면 1
+    const newId = todos.length > 0 ? Math.max(...todos.map((t) => t.id)) + 1 : 1;
+    
+    // 새로운 Todo 객체 생성
+    const newTodo = {
+    id: newId,  // 번호
+    content: content,   // 내용
+    done: false,    // 완료 여부 (처음엔 false)
+  };
+
+    // 배열에 추가
+    todos.push(newTodo);
+    // 파일에 저장
+    saveTodos(todos);
+
+    console.log(`Todo가 추가되었습니다: ${content}`);
+}
