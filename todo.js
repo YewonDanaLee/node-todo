@@ -123,3 +123,37 @@ function updateTodo(id, newContent) {
 
     console.log(`ID ${id}번 항목이 수정되었습니다.`);
 }
+
+// 명령어 처리
+// process.argv는 명령어 배열
+const [, , command, ...args] = process.argv;
+
+switch (command) {
+  case "add":
+    addTodo(args.join(" "));
+    break;
+
+  case "list":
+    listTodos();
+    break;
+
+  case "done":
+    doneTodo(Number(args[0]));
+    break;
+
+  case "delete":
+    deleteTodo(Number(args[0]));
+    break;
+
+  case "update":
+    updateTodo(Number(args[0]), args.slice(1).join(" "));
+    break;
+
+  default:
+    console.log("사용 가능한 명령어:");
+    console.log("node todo.js add \"내용\"");
+    console.log("node todo.js list");
+    console.log("node todo.js done [ID]");
+    console.log("node todo.js delete [ID]");
+    console.log("node todo.js update [ID] \"새 내용\"");
+}
