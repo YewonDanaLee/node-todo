@@ -47,3 +47,22 @@ function addTodo(content) {
 
     console.log(`Todo가 추가되었습니다: ${content}`);
 }
+
+// Todo 목록 출력 함수
+function listTodos() {
+    // 기존 Todo 목록 불러오기
+    const todos = loadTodos();
+
+    // 아무것도 없으면 안내 메시지 출력
+    if (todos.length === 0) {
+        console.log("Todo가 없습니다.");
+        return;
+    }
+
+    // 각 Todo를 하나씩 출력
+    todos.forEach((todo) => {
+        // Todo 완료 여부에 따라 표시 다르게
+        const mark = todo.done ? "[x]" : "[ ]";
+        console.log(`${mark} ${todo.id}. ${todo.content}`);
+    });
+}
