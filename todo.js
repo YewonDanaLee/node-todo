@@ -86,3 +86,22 @@ function doneTodo(id) {
 
     console.log(`ID ${id}번 항목이 완료되었습니다.`);
 }
+
+// Todo 삭제 함수
+function deleteTodo(id) {
+    // 기존 Todo 목록 불려오기
+    const todos = loadTodos();
+    
+    // 해당 ID를 제외한 새로운 배열 만들기
+    const filtered = todos.filter((t) => t.id !== id);
+
+    if (filtered.length === todos.length) {
+        console.log("해당 ID를 찾을 수 없습니다.");
+        return;
+    }
+
+    // 파일에 저장
+    saveTodos(filtered);
+
+    console.log(`ID ${id}번 항목이 삭제되었습니다.`);
+}
