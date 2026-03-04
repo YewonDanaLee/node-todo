@@ -66,3 +66,23 @@ function listTodos() {
         console.log(`${mark} ${todo.id}. ${todo.content}`);
     });
 }
+
+// Todo 완료 처리 함수
+function doneTodo(id) {
+    // 기존 Todo 목록 불러오기
+    const todos = loadTodos();
+    // 해당 ID 찾기
+    const todo = todos.find((t) => t.id === id);
+
+    if (!todo) {
+        console.log("해당 ID를 찾을 수 없습니다.");
+        return;
+    }
+
+    // 완료 처리
+    todo.done = true;
+    // 파일에 저장
+    saveTodos(todos);
+
+    console.log(`ID ${id}번 항목이 완료되었습니다.`);
+}
